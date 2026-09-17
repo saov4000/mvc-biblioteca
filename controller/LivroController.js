@@ -22,13 +22,18 @@ class LivroController{
         res.redirect('/livros/all',{livros})
     }
 
+    static async update(req,res){
+        const id = req.params.id
+        const livro = await Livro.findOne({where:{id:id}})
+        res.render('livros/edit',{livro})
+    }
+
     static async remover(req,res){
         const id = req.body.id
         await Livro.destroy({where:{id:id}})
         res.redirect('/livros')
     }
 }
-
 
 module.exports = LivroController
 
